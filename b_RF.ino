@@ -22,47 +22,38 @@ unsigned long currentMillis;
 unsigned long prevMillis;
 unsigned long txIntervalMillis = 1000; // send once per second
 
-
-
-
-
-
 void send() {
+  bool rslt;
+  
+  char acceleration_buff[10];
+  itoa(accelerationPWM, acceleration_buff, 10);
+  Serial.print("acceleration_buff: ");
+  Serial.println(acceleration_buff);
+  char steering_buff[10];
+  itoa(steeringAngle, steering_buff, 10);
+  Serial.print("steering_buff: ");
+  Serial.println(steering_buff);
+  char lights_buff[10];
+  itoa(lightsOn, lights_buff, 10);
+  Serial.print("lights_buff: ");
+  Serial.println(lights_buff);
+  
+  char buff[32] = "";
+  strcat(buff, acceleration_buff);
+  strcat(buff, ",");
+  strcat(buff, steering_buff);
+  strcat(buff, ",");
+  strcat(buff, lights_buff);
+  Serial.println(buff);
+  
+  rslt = radio.write( &buff, sizeof(buff) );
+  // Always use sizeof() as it gives the size as the number of bytes.
+  // For example if dataToSend was an int sizeof() would correctly return 2
 
-    bool rslt;
-    
-    char lights_buff[2];
-    itoa(lightsOn, lights_buff, 10);
-    Serial.print("lights_buff: ");
-    Serial.println(lights_buff);
-    char acceleration_buff[2];
-    itoa(accelerationPWM, acceleration_buff, 10);
-    Serial.print("acceleration_buff: ");
-    Serial.println(acceleration_buff);
-    char steering_buff[2];
-    itoa(steeringAngle, steering_buff, 10);
-    Serial.print("steering_buff: ");
-    Serial.println(steering_buff);
-    char buff[16] = "<";
-    strcat(buff, acceleration_buff);
-    strcat(buff, ",");
-    strcat(buff, steering_buff);
-    strcat(buff, ",");
-    strcat(buff, lights_buff);
-    strcat(buff, ">");
-    Serial.println(buff);
-    
-    rslt = radio.write( &buff, sizeof(buff) );
-            // Always use sizeof() as it gives the size as the number of bytes.
-        // For example if dataToSend was an int sizeof() would correctly return 2
-
-//    Serial.print("Data Sent ");
-//    Serial.print(text);
-    if (rslt) {
-        Serial.println("  Acknowledge received");
-//        updateMessage();
-    }
-    else {
-        Serial.println("  Tx failed");
-    }
+  if (rslt) {
+      Serial.println("  Acknowledge received");
+  }
+  else {
+    Serial.println("  Tx failed");
+  }
 }

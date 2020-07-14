@@ -11,3 +11,5 @@ PS4USB PS4(&Usb);
 
 bool printAngle, printTouch;
 uint8_t oldL2Value, oldR2Value;
+
+uint8_t oldStickValue;

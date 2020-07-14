@@ -1,5 +1,4 @@
 /*
- Example sketch for the PS4 USB library - developed by Kristian Lauszus
- For more information visit my blog: http://blog.tkjelectronics.dk/ or
- send me an e-mail:  kristianl@tkjelectronics.com
+ This file uses the PS4 USB library - developed by Kristian Lauszus
+ and the NRF24L01 library developed by <author needed>
  */
