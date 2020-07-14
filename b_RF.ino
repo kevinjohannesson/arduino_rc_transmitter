@@ -43,7 +43,7 @@ void send() {
     itoa(steeringAngle, steering_buff, 10);
     Serial.print("steering_buff: ");
     Serial.println(steering_buff);
-    char buff[2] = "<";
+    char buff[16] = "<";
     strcat(buff, acceleration_buff);
     strcat(buff, ",");
     strcat(buff, steering_buff);
@@ -52,29 +52,17 @@ void send() {
     strcat(buff, ">");
     Serial.println(buff);
     
-    const char text[] = "100,90,1";
     rslt = radio.write( &buff, sizeof(buff) );
             // Always use sizeof() as it gives the size as the number of bytes.
         // For example if dataToSend was an int sizeof() would correctly return 2
 
-    Serial.print("Data Sent ");
-    Serial.print(text);
+//    Serial.print("Data Sent ");
+//    Serial.print(text);
     if (rslt) {
         Serial.println("  Acknowledge received");
-        updateMessage();
+//        updateMessage();
     }
     else {
         Serial.println("  Tx failed");
     }
-}
-
-//================
-
-void updateMessage() {
-        // so you can see that new data is being sent
-//    txNum += 1;
-//    if (txNum > '9') {
-//        txNum = '0';
-//    }
-//    dataToSend = "A";
 }
