@@ -12,12 +12,12 @@ void loop() {
 
 
 
-  currentMillis = millis();
-    if (currentMillis - prevMillis >= txIntervalMillis) {
-        send();
-        prevMillis = millis();
-    }
-
+//  currentMillis = millis();
+//    if (currentMillis - prevMillis >= txIntervalMillis) {
+//        send();
+//        prevMillis = millis();
+//    }
+//
 
     
 }
